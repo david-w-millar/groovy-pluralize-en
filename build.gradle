@@ -1,0 +1,55 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+import org.gradle.internal.os.OperatingSystem
+
+apply plugin: 'groovy'
+apply plugin: 'codenarc'
+
+version       = '0.1.0'
+description   = 'Groovy module to pluralize strings'
+
+defaultTasks 'build'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+ext {
+  groovy_version   = '2.3.6'
+  spock_version    = '0.7-groovy-2.0'
+  codenarc_version = '0.21'
+  evo_version      = '1.2'
+  jacoco_version   = '0.6.2.201302030002'
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile "org.codehaus.groovy:groovy-all:${groovy_version}"
+  compile "org.atteo:evo-inflector:${evo_version}"
+  testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
+    exclude module: 'groovy-all'
+  }
+}
+
+processResources {
+  filter ReplaceTokens, tokens: [
+      version     : version,
+      buildDate   : new Date().format("yyyy-MM-dd HH   : mm : ss.SSSZ"),
+      username    : System.properties["user.name"],
+      javaVersion : System.properties["java.version"],
+      osName      : System.properties["os.name"],
+      osVersion   : System.properties["os.version"]
+    ]
+}
+
+codenarc {
+  configFile             = file "${project.projectDir}/config/codenarc.groovy"
+  ignoreFailures         = false
+  reportFormat           = 'html'
+  toolVersion            = codenarc_version
+  maxPriority1Violations = 0
+  maxPriority2Violations = 0
+  maxPriority3Violations = 0
+}
+

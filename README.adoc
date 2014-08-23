@@ -1,0 +1,68 @@
+# Groovy Pluralize Module
+David W Millar <david.w.millar@gmail.com>
+
+Groovy extension module that adds the functionality
+to get plural inflections for words.
+
+
+### Installation
+
+Include the jar is in your classpath.  Groovy does the rest.
+
+
+### Usage
+
+.Example Usages
+[source, groovy]
+----
+# Plural Inflection
+assert 'mustache'.plural() == 'mustaches'
+assert 'wolf'.plural()     == 'wolves'
+
+# Plural Inflection with Cardinality
+assert 'codex'.plural(1) == 'codex'
+assert 'codex'.plural(8) == 'codices'
+
+# Capitalization
+assert 'Life'.plural() == 'Lives'
+
+# Unfortunately, capitalization does not behave consistently for certain words. EG:
+assert 'Tooth'.plural() == 'teeth'
+
+----
+
+
+### Building
+
+This project uses gradle for builds, and includes wrapper scripts
+so that it is not necessary to explicitly install gradle.
+
+.Gradle Examples
+[source,shell]
+----
+$ ./gradlew tasks   <1>
+$ ./gradlew jar     <2>
+$ ./gradlew test    <3>
+$ ./gradlew check   <4>
+----
+<1> Lists the available tasks for this project
+<2> Builds the jar
+<3> Runs tests
+<4> Runs tests and checks (eg: code quality checks)
+
+### Under the Hood
+
+This module uses the https://github.com/atteo/evo-inflector[evo-inflector] project
+under the hood, which is based off of Damian Conway's paper
+http://www.csse.monash.edu.au/~damian/papers/HTML/Plurals.html[An Algorithmic Approach to English Pluralization].
+It tends to get things right. See the https://github.com/atteo/evo-inflector[evo-inflector] project for more information.
+
+
+### License
+
+This project is licensed under the terms of the
+http://www.apache.org/licenses/LICENSE-2.0.html[Apache License, Version 2.0].
+
+&copy; 2014 David W Millar
+
+
