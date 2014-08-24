@@ -2,12 +2,11 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 apply plugin: 'groovy'
 apply plugin: 'codenarc'
-apply plugin: 'idea'
 apply plugin: 'signing'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
 
 description      = 'Groovy extension module to pluralize strings'
-version          = '0.1.0'
+version          = '0.1.0-SNAPSHOT'
 group            = 'org.millarts'
 archivesBaseName = name
 
@@ -95,45 +94,46 @@ artifacts {
   archives jar
 }
 
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-publishing {
-  publications {
-    maven(MavenPublication) {
-      // Artifacts
-      artifact sourceJar
-      artifact javadocJar
-      from components.java
+      repository(url: "file://$buildDir/repo/")
 
-      // Repos
-      repositories { maven { url "$buildDir/repo" } }
+      // Waiting for Sonatype OSS repo sign-off for project
+      //repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        //authentication(userName: ossrhUsername, password: ossrhPassword)
+      //}
+      //snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        //authentication(userName: ossrhUsername, password: ossrhPassword)
+      //}
 
-      // Pom
-      pom.withXml {
-        // General
-        asNode().appendNode('description', description)
-        asNode().appendNode('inceptionYear', '2014')
-        asNode().appendNode('scm')
-          .appendNode('url', project_url)
+      pom.project {
+        name "$project.name"
+        description "${project.description}"
+        inceptionYear '2014'
+        url project_url
+        packaging 'jar'
 
-        // License, SCM
-        asNode().appendNode('licenses')
-          .appendNode('license').with {
-            appendNode('name', 'The Apache Software License, Version 2.0')
-            appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
-            appendNode('distribution', 'repo')
+        scm { url project_url }
+
+        licenses {
+          license {
+            name 'The Apache License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
         }
 
-        // Devs
-        asNode().appendNode('developers')
-          .appendNode('developer').with {
-            appendNode('id', 'david-w-millar')
-            appendNode('name', 'David W Millar')
-            appendNode('roles')
-              .appendNode('role', 'Creator')
+        developers {
+          developer {
+            id 'david-w-millar'
+            name 'David W Millar'
+            email 'david.w.millar@gmail.com'
+          }
         }
       }
     }
   }
 }
-
 
