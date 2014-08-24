@@ -5,7 +5,7 @@ apply plugin: 'codenarc'
 apply plugin: 'signing'
 apply plugin: 'maven'
 
-description      = 'Groovy extension module to pluralize strings'
+description      = 'Groovy extension module - helps pluralize words fairly accurately'
 version          = '0.1.0-SNAPSHOT'
 group            = 'org.millarts'
 archivesBaseName = name
