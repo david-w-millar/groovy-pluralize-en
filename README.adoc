@@ -23,6 +23,7 @@ assert 'wolf'.plural()     == 'wolves'
 
 # Plural Inflection with Cardinality
 assert 'codex'.plural(1) == 'codex'
+assert 'codex'.plural(2) == 'codex'
 assert 'codex'.plural(8) == 'codices'
 
 # Capitalization
