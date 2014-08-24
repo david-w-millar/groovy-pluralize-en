@@ -9,8 +9,8 @@ description   = 'Groovy module to pluralize strings'
 
 defaultTasks 'build'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
 
 ext {
   groovy_version   = '2.3.6'
