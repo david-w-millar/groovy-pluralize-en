@@ -3,9 +3,11 @@ import org.gradle.internal.os.OperatingSystem
 
 apply plugin: 'groovy'
 apply plugin: 'codenarc'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 version       = '0.1.0'
-description   = 'Groovy module to pluralize strings'
+description   = 'Groovy extension module to pluralize strings'
 
 defaultTasks 'build'
 
@@ -17,7 +19,6 @@ ext {
   spock_version    = '0.7-groovy-2.0'
   codenarc_version = '0.21'
   evo_version      = '1.2'
-  jacoco_version   = '0.6.2.201302030002'
 }
 
 repositories {
