@@ -1,6 +1,8 @@
 # Groovy Pluralize Module
 David W Millar <david.w.millar@gmail.com>
 
+image:https://travis-ci.org/david-w-millar/groovy-pluralize-en.svg["Build Status", link="https://travis-ci.org/david-w-millar/groovy-pluralize-en"]
+
 Groovy extension module that adds the functionality
 to get plural inflections for words.
 
