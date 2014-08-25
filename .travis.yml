@@ -1,4 +1,5 @@
 language: groovy
+script: ./gradlew check
 jdk:
   - oraclejdk7
   - openjdk6
