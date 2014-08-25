@@ -112,13 +112,17 @@ uploadArchives { task ->
       }
 
       pom.project {
-        name "$project.name"
+        name "${project.name}:${project.version}"
         description "${project.description}"
         inceptionYear '2014'
         url project_url
         packaging 'jar'
 
-        scm { url project_url }
+        scm {
+          connection 'git@github.com:david-w-millar/groovy-pluralize-en.git'
+          developerConnection 'git@github.com:david-w-millar/groovy-pluralize-en.git'
+          url project_url
+        }
 
         licenses {
           license {
@@ -132,8 +136,11 @@ uploadArchives { task ->
             id 'david-w-millar'
             name 'David W Millar'
             email 'david.w.millar@gmail.com'
+            organization project_url
+            organizationUrl project_url
           }
         }
+
       }
     }
   }
