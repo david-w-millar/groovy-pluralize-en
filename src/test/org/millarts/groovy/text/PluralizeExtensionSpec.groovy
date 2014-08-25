@@ -1,4 +1,4 @@
-package groovy.text.pluralize
+package org.millarts.groovy.text
 
 import spock.lang.*
 

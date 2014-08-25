@@ -1,11 +1,15 @@
 import org.apache.tools.ant.filters.ReplaceTokens
-import org.gradle.internal.os.OperatingSystem
 
 apply plugin: 'groovy'
 apply plugin: 'codenarc'
+apply plugin: 'signing'
+apply plugin: 'maven'
 
-version       = '0.1.0'
-description   = 'Groovy module to pluralize strings'
+description      = 'Groovy extension module - helps pluralize words fairly accurately'
+version          = '0.2.0'
+group            = 'org.millarts'
+archivesBaseName = name
+
 
 defaultTasks 'build'
 
@@ -13,11 +17,13 @@ sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
 ext {
+  project_url      = 'https://github.com/david-w-millar/groovy-pluralize-en/'
+  isReleaseVersion = !version.endsWith('SNAPSHOT')
+
   groovy_version   = '2.3.6'
   spock_version    = '0.7-groovy-2.0'
   codenarc_version = '0.21'
   evo_version      = '1.2'
-  jacoco_version   = '0.6.2.201302030002'
 }
 
 repositories {
@@ -51,5 +57,81 @@ codenarc {
   maxPriority1Violations = 0
   maxPriority2Violations = 0
   maxPriority3Violations = 0
+}
+
+
+tasks.withType(Groovydoc) {
+  link 'http://download.oracle.com/javase/6/docs/api/',
+         'java.util',
+         'java.lang'
+
+  docTitle    = 'Groovy API Documentation for groovy-pluralize-en $version'
+  windowTitle = 'Groovy API for groovy-pluralize-en $version'
+  footer      = "<p style='text-align: center'>Groovy API Documentation for groovy-pluralize-en $version - Licensed under the Apache License, Version 2.0 - <a href='https://github.com/david-w-millar/groovy-pluralize-en/'>groovy-pluralize-en</a></p>"
+}
+
+
+// ----- [ Packaging and publishing ] -----
+
+task sourceJar(type: Jar) {
+  classifier 'sources'
+  from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: groovydoc) {
+  classifier = 'javadoc'
+  from groovydoc
+}
+
+signing {
+  required { isReleaseVersion }
+  sign configurations.archives
+}
+
+artifacts {
+  archives javadocJar
+  archives sourceJar
+  archives jar
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name "$project.name"
+        description "${project.description}"
+        inceptionYear '2014'
+        url project_url
+        packaging 'jar'
+
+        scm { url project_url }
+
+        licenses {
+          license {
+            name 'The Apache License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
+        }
+
+        developers {
+          developer {
+            id 'david-w-millar'
+            name 'David W Millar'
+            email 'david.w.millar@gmail.com'
+          }
+        }
+      }
+    }
+  }
 }
 
