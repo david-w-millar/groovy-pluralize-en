@@ -1,4 +1,4 @@
 # Extension Module Information
 moduleName = pluralize
-moduleVersion = 0.2.0
+moduleVersion = 0.2.1
 extensionClasses = org.millarts.groovy.text.PluralizeExtension
