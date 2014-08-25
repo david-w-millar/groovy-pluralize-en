@@ -6,7 +6,7 @@ apply plugin: 'signing'
 apply plugin: 'maven'
 
 description      = 'Groovy extension module - helps pluralize words fairly accurately'
-version          = '0.2.0'
+version          = '0.2.1'
 group            = 'org.millarts'
 archivesBaseName = name
 
@@ -18,7 +18,7 @@ targetCompatibility = 1.6
 
 ext {
   project_url      = 'https://github.com/david-w-millar/groovy-pluralize-en/'
-  isReleaseVersion = !version.endsWith('SNAPSHOT')
+  isReleaseVersion = ! version.endsWith('SNAPSHOT')
 
   groovy_version   = '2.3.6'
   spock_version    = '0.7-groovy-2.0'
@@ -84,7 +84,7 @@ task javadocJar(type: Jar, dependsOn: groovydoc) {
 }
 
 signing {
-  required { isReleaseVersion }
+  required { isReleaseVersion && gradle.taskGraph.hasTask('uploadArchives') }
   sign configurations.archives
 }
 
@@ -94,17 +94,21 @@ artifacts {
   archives jar
 }
 
-uploadArchives {
+uploadArchives { task ->
+  task.onlyIf { isReleaseVersion || ! project.hasProperty('ci') }
+
   repositories {
     mavenDeployer {
       beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: ossrhUsername, password: ossrhPassword)
-      }
-
-      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-        authentication(userName: ossrhUsername, password: ossrhPassword)
+      gradle.taskGraph.whenReady { taskGraph ->
+        if (taskGraph.hasTask(task)) {
+          repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            authentication(userName: ossrhUsername, password: ossrhPassword)
+          }
+          snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+            authentication(userName: ossrhUsername, password: ossrhPassword)
+          }
+        }
       }
 
       pom.project {
