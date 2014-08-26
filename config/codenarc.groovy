@@ -316,11 +316,11 @@ ruleset {
       maxClassAverageMethodAbcScore = 20
     }
     ClassSize { maxLines = 300 }
-    CrapMetric {
-      // Requires the GMetrics jar and a Cobertura coverage file
-      maxMethodCrapScore = 10
-      maxClassAverageMethodCrapScore = 5
-    }
+    //CrapMetric {
+      //// Requires the GMetrics jar and a Cobertura coverage file
+      //maxMethodCrapScore = 10
+      //maxClassAverageMethodCrapScore = 5
+    //}
     CyclomaticComplexity {
       // Requires the GMetrics jar
       maxMethodComplexity = 10
