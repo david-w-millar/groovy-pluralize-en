@@ -9,6 +9,13 @@ import spock.lang.*
  */
 class PluralizeExtensionSpec extends Specification {
 
+  void 'bare extension works'() {
+    expect:
+    PluralizeExtension.plural('bird')    == 'birds'
+    PluralizeExtension.plural('bird', 1) == 'bird'
+  }
+
+
   @Unroll
   void "The plural of #{word} is #{plural}"() {
     expect: word.plural() == plural
@@ -18,7 +25,7 @@ class PluralizeExtensionSpec extends Specification {
       'car'      | 'cars'
       'Bison'    | 'Bison'
       'sugar'    | 'sugar'
-      'CHILD'    | 'Children'  // Possibly not the desired behavior
+      'CHILD'    | 'Children'  // Probably not the desired behavior
       'man'      | 'men'
       'tooth'    | 'teeth'
       'mouse'    | 'mice'
@@ -32,6 +39,7 @@ class PluralizeExtensionSpec extends Specification {
 
   void 'I can specify the cardinality for the inflection'() {
     expect:
+    'bird'.plural(0)    == 'bird'
     'bird'.plural(1)    == 'bird'
     'bird'.plural(2)    == 'birds'
     'bird'.plural(8000) == 'birds'
@@ -48,12 +56,6 @@ class PluralizeExtensionSpec extends Specification {
 
     and:
     creature.plural() == 'doormice'
-  }
-
-  void 'bare extension works'() {
-    expect:
-    PluralizeExtension.plural('bird')    == 'birds'
-    PluralizeExtension.plural('bird', 1) == 'bird'
   }
 
 }

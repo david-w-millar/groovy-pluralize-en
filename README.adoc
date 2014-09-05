@@ -3,14 +3,18 @@ David W Millar <david.w.millar@gmail.com>
 
 image:https://travis-ci.org/david-w-millar/groovy-pluralize-en.svg["Build Status", link="https://travis-ci.org/david-w-millar/groovy-pluralize-en"]
 
-Groovy extension module that adds the functionality
-to get plural inflections for words.
+A lightweight Groovy extension module that adds the functionality
+to get plural inflections for words. Suitable for most English applications.
 
+For much more robust JVM application needs, checkout IBM's more comprehensive and feature filled
+http://www-01.ibm.com/software/globalization/icu/[International Components for Unicode] library.
 
 ### Installation
 
 Include the jar is in your classpath.  Groovy does the rest.
 
+[NOTE]
+Requires groovy 2.0 or later.
 
 ### Usage
 
