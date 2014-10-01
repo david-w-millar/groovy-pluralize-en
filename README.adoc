@@ -7,15 +7,33 @@ image:http://img.shields.io/maven-central/v/org.millarts/groovy-pluralize-en.svg
 A lightweight Groovy extension module that adds the functionality
 to get plural inflections for words. Suitable for most English applications.
 
-For much more robust JVM application needs, checkout IBM's more comprehensive and feature filled
+For more robust needs, checkout IBM's more comprehensive and feature rich
 http://www-01.ibm.com/software/globalization/icu/[International Components for Unicode] library.
 
 ### Installation
 
-Include the jar is in your classpath.  Groovy does the rest.
+Include the jar is in your classpath, or add it as a dependency to your favorite build tool.  Groovy does the rest.
 
 [NOTE]
 Requires groovy 2.0 or later.
+
+.Gradle and Grails
+[source, groovy]
+compile 'org.millarts:groovy-pluralize-en:0.2.1'
+
+.Groovy Grape
+[source, groovy]
+@Grapes(
+  @Grab(group='org.millarts', module='groovy-pluralize-en', version='0.2.1')
+)
+
+.Maven
+[source, xml]
+<dependency>
+  <groupId>org.millarts</groupId>
+  <artifactId>groovy-pluralize-en</artifactId>
+  <version>0.2.1</version>
+</dependency>
 
 ### Usage
 
@@ -28,7 +46,7 @@ assert 'wolf'.plural()     == 'wolves'
 
 # Plural Inflection with Cardinality
 assert 'codex'.plural(1) == 'codex'
-assert 'codex'.plural(2) == 'codex'
+assert 'codex'.plural(2) == 'codices'
 assert 'codex'.plural(8) == 'codices'
 
 # Capitalization
@@ -43,7 +61,7 @@ assert 'Tooth'.plural() == 'teeth'
 ### Building
 
 This project uses gradle for builds, and includes wrapper scripts
-so that it is not necessary to explicitly install gradle.
+so that it is not necessary to explicitly install gradle to build and test the project.
 
 .Gradle Examples
 [source,shell]
