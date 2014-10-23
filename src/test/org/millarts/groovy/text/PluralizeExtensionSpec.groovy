@@ -34,6 +34,8 @@ class PluralizeExtensionSpec extends Specification {
       'codex'    | 'codices'
       'foot'     | 'feet'
       'mustache' | 'mustaches'
+      'goose'    | 'geese'
+      'ox'       | 'oxen'
   }
 
 
