@@ -40,19 +40,19 @@ compile 'org.millarts:groovy-pluralize-en:0.2.1'
 .Example Usages
 [source, groovy]
 ----
-# Plural Inflection
+// Plural Inflection
 assert 'mustache'.plural() == 'mustaches'
 assert 'wolf'.plural()     == 'wolves'
 
-# Plural Inflection with Cardinality
+// Plural Inflection with Cardinality
 assert 'codex'.plural(1) == 'codex'
 assert 'codex'.plural(2) == 'codices'
 assert 'codex'.plural(8) == 'codices'
 
-# Capitalization
+// Capitalization
 assert 'Life'.plural() == 'Lives'
 
-# Unfortunately, capitalization does not behave consistently for certain words. EG:
+// Unfortunately, capitalization does not behave consistently for certain words. EG:
 assert 'Tooth'.plural() == 'teeth'
 
 ----
