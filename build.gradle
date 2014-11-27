@@ -5,25 +5,16 @@ apply plugin: 'codenarc'
 apply plugin: 'signing'
 apply plugin: 'maven'
 
-description      = 'Groovy extension module - helps pluralize words fairly accurately'
-version          = '0.2.1'
-group            = 'org.millarts'
 archivesBaseName = name
 
+ext {
+  isReleaseVersion = ! version.endsWith('SNAPSHOT')
+}
 
 defaultTasks 'build'
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
-
-ext {
-  project_url      = 'https://github.com/david-w-millar/groovy-pluralize-en/'
-  isReleaseVersion = ! version.endsWith('SNAPSHOT')
-
-  groovy_version   = '2.3.6'
-  spock_version    = '0.7-groovy-2.0'
-  codenarc_version = '0.21'
-  evo_version      = '1.2'
+configurations {
+  asciidoclet
 }
 
 repositories {
@@ -31,8 +22,9 @@ repositories {
 }
 
 dependencies {
-  compile "org.codehaus.groovy:groovy-all:${groovy_version}"
-  compile "org.atteo:evo-inflector:${evo_version}"
+  asciidoclet "org.asciidoctor:asciidoclet:${asciidocletVersion}"
+  compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+  compile "org.atteo:evo-inflector:${evoVersion}"
   testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
     exclude module: 'groovy-all'
   }
@@ -53,7 +45,7 @@ codenarc {
   configFile             = file "${project.projectDir}/config/codenarc.groovy"
   ignoreFailures         = false
   reportFormat           = 'html'
-  toolVersion            = codenarc_version
+  toolVersion            = codenarcVersion
   maxPriority1Violations = 0
   maxPriority2Violations = 0
   maxPriority3Violations = 0
@@ -81,6 +73,11 @@ task sourceJar(type: Jar) {
 task javadocJar(type: Jar, dependsOn: groovydoc) {
   classifier = 'javadoc'
   from groovydoc
+}
+
+javadoc {
+  options.docletpath = configurations.asciidoclet.files.asType(List)
+  options.doclet = 'org.asciidoctor.Asciidoclet'
 }
 
 signing {
@@ -112,13 +109,17 @@ uploadArchives { task ->
       }
 
       pom.project {
-        name "$project.name"
+        name "${project.name}:${project.version}"
         description "${project.description}"
         inceptionYear '2014'
-        url project_url
+        url projectUrl
         packaging 'jar'
 
-        scm { url project_url }
+        scm {
+          connection 'git@github.com:david-w-millar/groovy-pluralize-en.git'
+          developerConnection 'git@github.com:david-w-millar/groovy-pluralize-en.git'
+          url projectUrl
+        }
 
         licenses {
           license {
@@ -132,8 +133,11 @@ uploadArchives { task ->
             id 'david-w-millar'
             name 'David W Millar'
             email 'david.w.millar@gmail.com'
+            organization projectUrl
+            organizationUrl projectUrl
           }
         }
+
       }
     }
   }
