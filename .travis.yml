@@ -1,5 +1,5 @@
 language: groovy
-script: "./gradlew -Pci check"
+script: "gradle -Pci check"
 jdk:
   - oraclejdk7
   - openjdk6
