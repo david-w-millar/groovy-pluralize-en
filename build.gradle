@@ -23,7 +23,7 @@ ext {
   spock_version      = '0.7-groovy-2.0'
   codenarc_version   = '0.21'
   evo_version        = '1.2'
-  asciidocletVersion = 1.5.1
+  asciidocletVersion = '1.5.1'
 }
 
 configurations {
