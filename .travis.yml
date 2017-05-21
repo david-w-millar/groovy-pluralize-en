@@ -1,9 +1,13 @@
 language: groovy
-script: "gradle check"
+
+sudo: false # run on container-based infratructure
+
 jdk:
   - openjdk7
-  - openjdk8
+  - oraclejdk8
+
 env:
   - TERM=dumb
 
-
+script:
+  - "./gradlew --no-daemon check"
