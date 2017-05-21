@@ -1,11 +1,11 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-  id: 'groovy'
-  id: 'codenarc'
-  id: 'signing'
-  id: 'maven'
-  id: 'com.jfrog.bintrary' version '1.7'
+  id 'groovy'
+  id 'codenarc'
+  id 'signing'
+  id 'maven'
+  id "com.jfrog.bintray" version "1.7.3"
 }
 
 archivesBaseName = name
@@ -21,6 +21,7 @@ configurations {
 }
 
 repositories {
+  jcenter()
   mavenCentral()
 }
 
