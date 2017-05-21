@@ -26,8 +26,12 @@ repositories {
 }
 
 dependencies {
+  compile "org.codehaus.groovy:groovy:${groovyVersion}"
+  compile "org.codehaus.groovy:groovy-ant:${groovyVersion}"
+  compile "org.codehaus.groovy:groovy-test:${groovyVersion}"
+
   asciidoclet "org.asciidoctor:asciidoclet:${asciidocletVersion}"
-  compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+
   compile "org.atteo:evo-inflector:${evoVersion}"
   testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
     exclude module: 'groovy-all'

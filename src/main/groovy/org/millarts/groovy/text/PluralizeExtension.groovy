@@ -6,6 +6,11 @@ import org.atteo.evo.inflector.English
  * This class enhances strings by adding a plural() method
  * that returns the plural inflection for a word.
  *
+ * <pre class="groovyTestCase">
+ *   assert "example".size() == 7
+ * </pre>
+ *
+ *
  * @since 0.1.0
  */
 class PluralizeExtension {
