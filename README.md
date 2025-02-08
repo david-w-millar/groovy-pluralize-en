@@ -2,12 +2,12 @@
 David W Millar <david.w.millar@gmail.com>
 
 
-> [!IMPORTANT]
-> This project has been archived, as it no longer seems worth maintaining with so many better options out there. Feel free to reach out to me if you have any questions or interest in reviving it.
-
-
 image:https://travis-ci.org/david-w-millar/groovy-pluralize-en.svg["Build Status", link="https://travis-ci.org/david-w-millar/groovy-pluralize-en"]
 image:http://img.shields.io/maven-central/v/org.millarts/groovy-pluralize-en.svg["Maven Coordinates"]
+
+
+> [!IMPORTANT]
+> This project has been archived, as it no longer seems worth maintaining with so many better options out there. Feel free to reach out to me if you have any questions or interest in reviving it.
 
 
 A lightweight Groovy extension module that adds the functionality
@@ -97,4 +97,3 @@ http://www.apache.org/licenses/LICENSE-2.0.html[Apache License, Version 2.0].
 &copy; 2014 David W Millar
 
 // vim: set syntax=asciidoc:
-
