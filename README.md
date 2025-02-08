@@ -2,10 +2,10 @@
 David W Millar <david.w.millar@gmail.com>
 
 
-> [!IMPORTANT]
-> This project has been archived,
-> as it no longer seems worth maintaining with so many better options out there.
-> Feel free to reach out to me if you have any questions or interest in reviving it.
+[!IMPORTANT]
+This project has been archived,
+as it no longer seems worth maintaining with so many better options out there.
+Feel free to reach out to me if you have any questions or interest in reviving it.
 
 
 image:https://travis-ci.org/david-w-millar/groovy-pluralize-en.svg["Build Status", link="https://travis-ci.org/david-w-millar/groovy-pluralize-en"]
@@ -21,8 +21,8 @@ http://www-01.ibm.com/software/globalization/icu/[International Components for U
 
 Include the jar is in your classpath, or add it as a dependency to your favorite build tool.  Groovy does the rest.
 
-> [!NOTE]
-> Requires groovy 2.0 or later.
+[!NOTE]
+Requires groovy 2.0 or later.
 
 .Gradle and Grails
 [source, groovy]
