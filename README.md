@@ -10,30 +10,6 @@ image:https://travis-ci.org/david-w-millar/groovy-pluralize-en.svg["Build Status
 image:http://img.shields.io/maven-central/v/org.millarts/groovy-pluralize-en.svg["Maven Coordinates"]
 
 
-> [!NOTE]
-> Useful information that users should know, even when skimming content.
-
-> [!TIP]
-> Helpful advice for doing things better or more easily.
-
-> [!IMPORTANT]
-> Key information users need to know to achieve their goal.
-
-> [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
-
-> [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
-
-
-> **Note**
-> This is a note
-
-> **Warning**
-> This is a warning
-
-
-
 A lightweight Groovy extension module that adds the functionality
 to get plural inflections for words. Suitable for most English applications.
 
@@ -42,11 +18,9 @@ http://www-01.ibm.com/software/globalization/icu/[International Components for U
 
 ### Installation
 
-Include the jar is in your classpath, or add it as a dependency to your favorite build tool.  Groovy does the rest.
-
-
-> [!NOTE]
-> Requires groovy 2.0 or later.
+Include the jar is in your classpath, or add it as a dependency to your favorite build tool.
+Groovy does the rest.
+Requires groovy 2.0 or later.
 
 
 .Gradle and Grails
