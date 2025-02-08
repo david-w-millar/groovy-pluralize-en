@@ -1,145 +1,16 @@
-import org.apache.tools.ant.filters.ReplaceTokens
-
 apply plugin: 'groovy'
-apply plugin: 'codenarc'
-apply plugin: 'signing'
-apply plugin: 'maven'
 
-archivesBaseName = name
-
-ext {
-  isReleaseVersion = ! version.endsWith('SNAPSHOT')
-}
-
-defaultTasks 'build'
-
-configurations {
-  asciidoclet
-}
+defaultTasks = ['test', 'assemble']
 
 repositories {
   mavenCentral()
 }
 
 dependencies {
-  asciidoclet "org.asciidoctor:asciidoclet:${asciidocletVersion}"
-  compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
-  compile "org.atteo:evo-inflector:${evoVersion}"
-  testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
+  implementation "org.codehaus.groovy:groovy-all:${groovyVersion}"
+  implementation "org.atteo:evo-inflector:${evoVersion}"
+  testImplementation('org.spockframework:spock-core:0.7-groovy-2.0') {
     exclude module: 'groovy-all'
-  }
-}
-
-processResources {
-  filter ReplaceTokens, tokens: [
-      version     : version,
-      buildDate   : new Date().format("yyyy-MM-dd HH   : mm : ss.SSSZ"),
-      username    : System.properties["user.name"],
-      javaVersion : System.properties["java.version"],
-      osName      : System.properties["os.name"],
-      osVersion   : System.properties["os.version"]
-    ]
-}
-
-codenarc {
-  configFile             = file "${project.projectDir}/config/codenarc.groovy"
-  ignoreFailures         = false
-  reportFormat           = 'html'
-  toolVersion            = codenarcVersion
-  maxPriority1Violations = 0
-  maxPriority2Violations = 0
-  maxPriority3Violations = 0
-}
-
-
-tasks.withType(Groovydoc) {
-  link 'http://download.oracle.com/javase/6/docs/api/',
-         'java.util',
-         'java.lang'
-
-  docTitle    = 'Groovy API Documentation for groovy-pluralize-en $version'
-  windowTitle = 'Groovy API for groovy-pluralize-en $version'
-  footer      = "<p style='text-align: center'>Groovy API Documentation for groovy-pluralize-en $version - Licensed under the Apache License, Version 2.0 - <a href='https://github.com/david-w-millar/groovy-pluralize-en/'>groovy-pluralize-en</a></p>"
-}
-
-
-// ----- [ Packaging and publishing ] -----
-
-task sourceJar(type: Jar) {
-  classifier 'sources'
-  from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: groovydoc) {
-  classifier = 'javadoc'
-  from groovydoc
-}
-
-javadoc {
-  options.docletpath = configurations.asciidoclet.files.asType(List)
-  options.doclet = 'org.asciidoctor.Asciidoclet'
-}
-
-signing {
-  required { isReleaseVersion && gradle.taskGraph.hasTask('uploadArchives') }
-  sign configurations.archives
-}
-
-artifacts {
-  archives javadocJar
-  archives sourceJar
-  archives jar
-}
-
-uploadArchives { task ->
-  task.onlyIf { isReleaseVersion || ! project.hasProperty('ci') }
-
-  repositories {
-    mavenDeployer {
-      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-      gradle.taskGraph.whenReady { taskGraph ->
-        if (taskGraph.hasTask(task)) {
-          repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-            authentication(userName: ossrhUsername, password: ossrhPassword)
-          }
-          snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-            authentication(userName: ossrhUsername, password: ossrhPassword)
-          }
-        }
-      }
-
-      pom.project {
-        name "${project.name}:${project.version}"
-        description "${project.description}"
-        inceptionYear '2014'
-        url projectUrl
-        packaging 'jar'
-
-        scm {
-          connection 'git@github.com:david-w-millar/groovy-pluralize-en.git'
-          developerConnection 'git@github.com:david-w-millar/groovy-pluralize-en.git'
-          url projectUrl
-        }
-
-        licenses {
-          license {
-            name 'The Apache License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-          }
-        }
-
-        developers {
-          developer {
-            id 'david-w-millar'
-            name 'David W Millar'
-            email 'david.w.millar@gmail.com'
-            organization projectUrl
-            organizationUrl projectUrl
-          }
-        }
-
-      }
-    }
   }
 }
 
