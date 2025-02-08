@@ -26,6 +26,13 @@ image:http://img.shields.io/maven-central/v/org.millarts/groovy-pluralize-en.svg
 > Advises about risks or negative outcomes of certain actions.
 
 
+> **Note**
+> This is a note
+
+> **Warning**
+> This is a warning
+
+
 
 A lightweight Groovy extension module that adds the functionality
 to get plural inflections for words. Suitable for most English applications.
