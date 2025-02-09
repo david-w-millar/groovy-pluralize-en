@@ -1,13 +1,11 @@
 # (ARCHIVED) Groovy Pluralize Module
 David W Millar <david.w.millar@gmail.com>
 
+mage:https://travis-ci.org/david-w-millar/groovy-pluralize-en.svg["Build Status", link="https://travis-ci.org/david-w-millar/groovy-pluralize-en"]
+image:http://img.shields.io/maven-central/v/org.millarts/groovy-pluralize-en.svg["Maven Coordinates"]
 
-> [!IMPORTANT]
-> This project has been archived, as it no longer seems worth maintaining with so many better options out there. Feel free to reach out to me if you have any questions or interest in reviving it.
 
-
-[![Build Status](https://travis-ci.org/david-w-millar/groovy-pluralize-en.svg)](https://travis-ci.org/david-w-millar/groovy-pluralize-en)
-[![Maven Coordinates](https://travis-ci.org/david-w-millar/groovy-pluralize-en.svg)](https://central.sonatype.com/artifact/org.millarts/groovy-pluralize-en)
+> [!Important] This project has been archived, as it no longer seems worth maintaining with so many better options out there. Feel free to reach out to me if you have any questions or interest in reviving it.
 
 
 A lightweight Groovy extension module that adds the functionality
@@ -15,6 +13,7 @@ to get plural inflections for words. Suitable for most English applications.
 
 For more robust needs, checkout IBM's more comprehensive and feature rich
 http://www-01.ibm.com/software/globalization/icu/[International Components for Unicode] library.
+
 
 ### Installation
 
