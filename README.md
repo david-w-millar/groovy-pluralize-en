@@ -24,28 +24,30 @@ Requires groovy 2.0 or later.
 
 
 .Gradle and Grails
-[source, groovy]
+```groovy
 compile 'org.millarts:groovy-pluralize-en:0.2.1'
+```
 
 .Groovy Grape
-[source, groovy]
+```groovy
 @Grapes(
   @Grab(group='org.millarts', module='groovy-pluralize-en', version='0.2.1')
 )
+```
 
 .Maven
-[source, xml]
+```xml
 <dependency>
   <groupId>org.millarts</groupId>
   <artifactId>groovy-pluralize-en</artifactId>
   <version>0.2.1</version>
 </dependency>
+```
 
 ### Usage
 
 .Example Usages
-[source, groovy]
-----
+```groovy
 // Plural Inflection
 assert 'mustache'.plural() == 'mustaches'
 assert 'wolf'.plural()     == 'wolves'
@@ -60,7 +62,7 @@ assert 'Life'.plural() == 'Lives'
 
 // Unfortunately, capitalization does not behave consistently for certain words. EG:
 assert 'Tooth'.plural() == 'teeth'
-----
+```
 
 
 ### Building
@@ -69,13 +71,12 @@ This project uses gradle for builds, and includes wrapper scripts
 so that it is not necessary to explicitly install gradle to build and test the project.
 
 .Gradle Examples
-[source,shell]
-----
+```shell
 $ ./gradlew tasks   <1>
 $ ./gradlew jar     <2>
 $ ./gradlew test    <3>
 $ ./gradlew check   <4>
-----
+```
 <1> Lists the available tasks for this project
 <2> Builds the jar
 <3> Runs tests
@@ -94,6 +95,6 @@ It tends to get things right. See the https://github.com/atteo/evo-inflector[evo
 This project is licensed under the terms of the
 http://www.apache.org/licenses/LICENSE-2.0.html[Apache License, Version 2.0].
 
-&copy; 2014 David W Millar
+&copy; 2014-2025 David W Millar
 
 // vim: set syntax=asciidoc:
