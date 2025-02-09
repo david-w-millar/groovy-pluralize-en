@@ -5,7 +5,7 @@ image:https://travis-ci.org/david-w-millar/groovy-pluralize-en.svg["Build Status
 image:http://img.shields.io/maven-central/v/org.millarts/groovy-pluralize-en.svg["Maven Coordinates"]
 
 
-> [!Important] This project has been archived, as it no longer seems worth maintaining with so many better options out there. Feel free to reach out to me if you have any questions or interest in reviving it.
+> ***Important*** This project has been archived, as it no longer seems worth maintaining with so many better options out there. Feel free to reach out to me if you have any questions or interest in reviving it.
 
 
 A lightweight Groovy extension module that adds the functionality
